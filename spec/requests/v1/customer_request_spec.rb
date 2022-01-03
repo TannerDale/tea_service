@@ -38,7 +38,6 @@ describe 'Customer Requests' do
       end
 
       it 'does not create the user' do
-        binding.pry
         expect(Customer.count).to eq(0)
       end
 
