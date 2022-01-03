@@ -37,7 +37,11 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 group :test do
+  gem 'factory_bot'
+  gem 'faker'
+  gem 'database_cleaner'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
 group :development, :test do
