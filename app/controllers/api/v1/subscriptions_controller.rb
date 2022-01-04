@@ -1,5 +1,7 @@
 class Api::V1::SubscriptionsController < ApplicationController
-  def index; end
+  def index
+    render json: V1::CustomerSubscriptionsSerializer.serialize(current_customer)
+  end
 
   def create
     render json: current_customer.subscriptions.create!(subscription_params), status: 201
