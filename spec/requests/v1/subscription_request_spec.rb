@@ -1,10 +1,58 @@
 require 'rails_helper'
 
 describe 'Subscription Requests' do
+  let(:headers) { { 'CONTENT_TYPE': 'application/json' } }
+
+  context 'GET v1/customers/:customer_id/subscriptions' do
+    let!(:customer) { create :customer }
+    let!(:teas) { create_list :tea, 2 }
+    let!(:subs_1_active) do
+      create_list :subscription, 3, tea_id: teas.first.id, customer_id: customer.id, status: 0
+    end
+    let!(:subs_2_active) do
+      create_list :subscription, 3, tea_id: teas.last.id, customer_id: customer.id, status: 0
+    end
+    let!(:subs_1_canceled) do
+      create_list :subscription, 2, tea_id: teas.first.id, customer_id: customer.id, status: 1
+    end
+    let!(:subs_2_canceled) do
+      create_list :subscription, 2, tea_id: teas.last.id, customer_id: customer.id, status: 1
+    end
+    let(:json) { JSON.parse(response.body, symbolize_names: true) }
+    let(:subscriptions) { json[:subscriptions] }
+
+    describe 'with valid customer id' do
+      before { get api_v1_customer_subscriptions_path(customer), headers: headers }
+
+      it 'has all of the customers subscriptions grouped by active and inactive' do
+        expect(json[:subscriptions]).not_to be_empty
+        expect(subscriptions.keys).to eq(%i[active canceled])
+        expect(subscriptions[:active].count).to eq(6)
+        expect(subscriptions[:canceled].count).to eq(4)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status 200
+      end
+    end
+
+    describe 'with invalid customer id' do
+      before { get api_v1_customer_subscriptions_path(customer.id + 1), headers: headers }
+
+      it 'returns an error message' do
+        expect(json).to have_key :error
+        expect(json[:error][:details]).to include("Couldn't find Customer")
+      end
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status 404
+      end
+    end
+  end
+
   context 'POST v1/customers/:customer_id/subscriptions' do
     let!(:customer) { create :customer }
     let!(:tea) { create :tea }
-    let(:headers) { { 'CONTENT_TYPE': 'application/json' } }
     let(:valid_params) do
       {
         title: 'My fav tea',
@@ -91,7 +139,7 @@ describe 'Subscription Requests' do
     context 'with invalid params' do
       let(:parsed) { JSON.parse(response.body, symbolize_names: true) }
 
-      context 'with invalid tea id' do
+      context 'with invalid subscription id' do
         before { patch api_v1_customer_subscription_path(customer, subscription.id + 1), headers: headers }
 
         it 'does not update the subscription' do

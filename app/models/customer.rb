@@ -5,4 +5,12 @@ class Customer < ApplicationRecord
   validates :address, presence: true
 
   has_many :subscriptions
+
+  def active_subscriptions
+    subscriptions.active
+  end
+
+  def canceled_subscriptions
+    subscriptions.canceled
+  end
 end
