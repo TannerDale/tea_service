@@ -91,7 +91,7 @@ describe 'Subscription Requests' do
     context 'with invalid params' do
       let(:parsed) { JSON.parse(response.body, symbolize_names: true) }
 
-      context 'with invalid tea id' do
+      context 'with invalid subscription id' do
         before { patch api_v1_customer_subscription_path(customer, subscription.id + 1), headers: headers }
 
         it 'does not update the subscription' do
