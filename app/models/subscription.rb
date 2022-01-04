@@ -8,4 +8,8 @@ class Subscription < ApplicationRecord
 
   enum status: %w[active canceled]
   enum frequency: %w[daily weekly monthly]
+
+  def cancel_subscription!
+    update_attribute(:status, 1) if active?
+  end
 end
