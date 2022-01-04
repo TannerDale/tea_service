@@ -12,4 +12,8 @@ class Subscription < ApplicationRecord
   def cancel_subscription!
     update_attribute(:status, 1) if active?
   end
+
+  scope :grouped_by_status, -> {
+    group_by(&:status)
+  }
 end

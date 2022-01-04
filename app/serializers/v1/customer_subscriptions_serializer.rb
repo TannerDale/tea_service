@@ -10,10 +10,9 @@ module V1::CustomerSubscriptionsSerializer
     private
 
     def formatted_subscriptions(customer)
-      {
-        active: format(customer.active_subscriptions),
-        canceled: format(customer.canceled_subscriptions)
-      }
+      customer.subscriptions_by_status.transform_values do |sub|
+        format(sub)
+      end
     end
 
     def format(subscriptions)

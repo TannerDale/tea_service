@@ -4,5 +4,5 @@ class Tea < ApplicationRecord
   validates :temperature, presence: true
   validates :brew_time, presence: true
 
-  has_many :subscriptions
+  has_many :subscriptions, dependent: :destroy
 end
