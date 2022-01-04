@@ -6,11 +6,7 @@ class Customer < ApplicationRecord
 
   has_many :subscriptions, dependent: :destroy
 
-  def active_subscriptions
-    subscriptions.active
-  end
-
-  def canceled_subscriptions
-    subscriptions.canceled
+  def subscriptions_by_status
+    subscriptions.grouped_by_status
   end
 end

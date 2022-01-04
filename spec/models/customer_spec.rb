@@ -29,4 +29,26 @@ describe Customer do
   describe 'relationships' do
     it { should have_many :subscriptions }
   end
+
+  describe 'methods' do
+    describe '#subscriptions_by_status' do
+      let!(:customer) { create :customer }
+      let!(:tea) { create :tea }
+      let!(:active_subs) do
+        create_list :subscription, 2, customer_id: customer.id, tea_id: tea.id, status: 0
+      end
+      let!(:canceled_subs) do
+        create_list :subscription, 3, customer_id: customer.id, tea_id: tea.id, status: 1
+      end
+
+      it 'has the subscriptions grouped by status' do
+        expected = {
+          'canceled' => canceled_subs,
+          'active' => active_subs
+        }
+
+        expect(customer.subscriptions_by_status).to eq(expected)
+      end
+    end
+  end
 end
