@@ -1,6 +1,6 @@
 class Api::V1::CustomersController < ApplicationController
   def create
-    render json: Customer.create!(customer_params)
+    render json: Customer.create!(customer_params), status: 201
   end
 
   private
