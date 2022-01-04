@@ -25,4 +25,8 @@ describe Customer do
       expect(invalid_user.valid?).to be false
     end
   end
+
+  describe 'relationships' do
+    it { should have_many :subscriptions }
+  end
 end
