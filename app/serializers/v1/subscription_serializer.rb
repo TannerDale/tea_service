@@ -14,7 +14,8 @@ module V1::SubscriptionSerializer
         title: subscription.title,
         price: subscription.price,
         status: subscription.status,
-        frequency: subscription.frequency
+        frequency: subscription.frequency,
+        tea_id: subscription.tea_id
       }
     end
   end
