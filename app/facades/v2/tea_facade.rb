@@ -1,4 +1,4 @@
-class TeaFacade
+class V2::TeaFacade
   class << self
     def fetch_teas
       format_teas(TeaClient.fetch('/tea'))
