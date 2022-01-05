@@ -7,10 +7,12 @@ describe 'Customer Requests' do
     context 'with valid params' do
       let(:valid_params) do
         {
-          first_name: Faker::Name.first_name,
-          last_name: Faker::Name.last_name,
-          email: Faker::Internet.email,
-          address: '123 Street Dr.'
+          customer: {
+            first_name: Faker::Name.first_name,
+            last_name: Faker::Name.last_name,
+            email: Faker::Internet.email,
+            address: '123 Street Dr.'
+          }
         }
       end
 
