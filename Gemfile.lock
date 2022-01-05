@@ -85,6 +85,8 @@ GEM
       railties (>= 5.0.0)
     faker (2.19.0)
       i18n (>= 1.6, < 2)
+    faraday (2.0.0)
+      ruby2_keywords (>= 0.0.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.8.11)
@@ -92,8 +94,6 @@ GEM
     io-console (0.5.11)
     irb (1.4.1)
       reline (>= 0.3.0)
-    jsonapi-serializer (2.2.0)
-      activesupport (>= 4.2)
     loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -163,6 +163,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.3)
+    ruby2_keywords (0.0.5)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
     simplecov (0.21.2)
@@ -188,7 +189,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker
-  jsonapi-serializer
+  faraday
   pg (~> 1.1)
   pry
   puma (~> 5.0)
