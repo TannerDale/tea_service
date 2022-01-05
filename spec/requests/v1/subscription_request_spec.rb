@@ -72,7 +72,7 @@ describe 'Subscription Requests' do
         expect(Tea.first.subscriptions.count).to eq(1)
       end
 
-      it 'returns status code 200' do
+      it 'returns status code 201' do
         expect(response).to have_http_status 201
       end
     end
