@@ -25,7 +25,7 @@ After cloning the repository to your local machine:
 - `bundle exec rspec`
 
 ## Database Design
-
+![](https://user-images.githubusercontent.com/77412134/148276426-2e8ae483-baa2-4f87-9124-4f03d5d51ee3.png)
 ## Endpoints
 
 ### `GET /api/v1/teas`
@@ -153,5 +153,5 @@ Response:
 Response:
 `status: 204`
 
-### Contributors
-- Tanner Dale (GitHub)[https://github.com/TannerDale] (LinkedIn)[https://www.linkedin.com/in/tannerdale/]
+# Contributors
+### - Tanner Dale [GitHub](https://github.com/TannerDale) [LinkedIn](https://www.linkedin.com/in/tannerdale)
