@@ -2,6 +2,7 @@
 require 'spec_helper'
 require 'database_cleaner'
 require 'simplecov'
+require 'webmock'
 
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
@@ -33,6 +34,15 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
+end
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'spec/vcr'
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
+  c.default_cassette_options = {
+    match_requests_on: %i[method host path]
+  }
 end
 
 SimpleCov.start

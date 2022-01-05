@@ -37,6 +37,7 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 gem 'faraday'
+gem 'faraday-net_http'
 
 group :test do
   gem 'database_cleaner'
@@ -45,6 +46,8 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development, :test do
