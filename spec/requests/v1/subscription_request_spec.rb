@@ -12,10 +12,10 @@ describe 'Subscription Requests' do
     let!(:subs_2_active) do
       create_list :subscription, 3, tea_id: teas.last.id, customer_id: customer.id, status: 0
     end
-    let!(:subs_1_canceled) do
+    let!(:subs_1_cancelled) do
       create_list :subscription, 2, tea_id: teas.first.id, customer_id: customer.id, status: 1
     end
-    let!(:subs_2_canceled) do
+    let!(:subs_2_cancelled) do
       create_list :subscription, 2, tea_id: teas.last.id, customer_id: customer.id, status: 1
     end
     let(:json) { JSON.parse(response.body, symbolize_names: true) }
@@ -26,9 +26,9 @@ describe 'Subscription Requests' do
 
       it 'has all of the customers subscriptions grouped by active and inactive' do
         expect(json[:subscriptions]).not_to be_empty
-        expect(subscriptions.keys).to eq(%i[active canceled])
+        expect(subscriptions.keys).to eq(%i[active cancelled])
         expect(subscriptions[:active].count).to eq(6)
-        expect(subscriptions[:canceled].count).to eq(4)
+        expect(subscriptions[:cancelled].count).to eq(4)
       end
 
       it 'returns status code 200' do
@@ -128,7 +128,7 @@ describe 'Subscription Requests' do
       it 'updates the subscription' do
         subscription.reload
 
-        expect(subscription.status).to eq('canceled')
+        expect(subscription.status).to eq('cancelled')
       end
 
       it 'returns status code 201' do
@@ -151,14 +151,14 @@ describe 'Subscription Requests' do
         end
       end
 
-      context 'when the subscription is already canceled' do
+      context 'when the subscription is already cancelled' do
         before :each do
          patch api_v1_customer_subscription_path(customer, subscription.id ), headers: headers
          patch api_v1_customer_subscription_path(customer, subscription.id), headers: headers
         end
 
         it 'returns an error message' do
-          expect(parsed[:error]).to eq('Subscription has already been canceled')
+          expect(parsed[:error]).to eq('Subscription has already been cancelled')
         end
 
         it 'returns status code 400' do
