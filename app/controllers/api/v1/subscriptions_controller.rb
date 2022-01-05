@@ -11,7 +11,7 @@ class Api::V1::SubscriptionsController < ApplicationController
     if Subscription.find(params[:id]).cancel_subscription!
       render status: 204
     else
-      render json: { error: 'Subscription has already been canceled' }, status: 400
+      render json: { error: 'Subscription has already been cancelled' }, status: 400
     end
   end
 

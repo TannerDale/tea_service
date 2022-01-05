@@ -37,13 +37,13 @@ describe Customer do
       let!(:active_subs) do
         create_list :subscription, 2, customer_id: customer.id, tea_id: tea.id, status: 0
       end
-      let!(:canceled_subs) do
+      let!(:cancelled_subs) do
         create_list :subscription, 3, customer_id: customer.id, tea_id: tea.id, status: 1
       end
 
       it 'has the subscriptions grouped by status' do
         expected = {
-          'canceled' => canceled_subs,
+          'cancelled' => cancelled_subs,
           'active' => active_subs
         }
 

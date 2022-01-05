@@ -13,7 +13,7 @@ describe Subscription do
   end
 
   describe 'enums' do
-    it { should define_enum_for(:status).with_values %w[active canceled] }
+    it { should define_enum_for(:status).with_values %w[active cancelled] }
     it { should define_enum_for(:frequency).with_values %w[daily weekly monthly] }
   end
 
@@ -26,10 +26,10 @@ describe Subscription do
       it 'can unsubscribe a customer from a tea' do
         subscription.cancel_subscription!
 
-        expect(subscription.status).to eq('canceled')
+        expect(subscription.status).to eq('cancelled')
       end
 
-      it 'returns nil if the status is already canceled' do
+      it 'returns nil if the status is already cancelled' do
         subscription.cancel_subscription!
 
         expect(subscription.cancel_subscription!).to be nil
@@ -42,13 +42,13 @@ describe Subscription do
       let!(:active_subs) do
         create_list :subscription, 2, customer_id: customer.id, tea_id: tea.id, status: 0
       end
-      let!(:canceled_subs) do
+      let!(:cancelled_subs) do
         create_list :subscription, 3, customer_id: customer.id, tea_id: tea.id, status: 1
       end
 
       it 'has the subscriptions grouped by status' do
         expected = {
-          'canceled' => canceled_subs,
+          'cancelled' => cancelled_subs,
           'active' => active_subs
         }
 

@@ -82,12 +82,12 @@ Response:
 {
   "id": 1,
   "subscriptions": {
-    "canceled": [
+    "cancelled": [
       {
         "id": 1,
         "title": "subscription 1",
         "price": 1250,
-        "status": "canceled",
+        "status": "cancelled",
         "frequency": "weekly",
         "tea_id": 2
       },
@@ -95,7 +95,7 @@ Response:
         "id": 6,
         "title": "subscription 6",
         "price": 1250,
-        "status": "canceled",
+        "status": "cancelled",
         "frequency": "daily",
         "tea_id": 1
       }
