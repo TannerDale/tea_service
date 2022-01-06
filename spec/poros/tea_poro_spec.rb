@@ -14,7 +14,7 @@ describe TeaPoro do
 
   it 'has attributes' do
     expect(tea_poro.id).to eq data[:_id]
-    expect(tea_poro.name).to eq data[:name]
+    expect(tea_poro.title).to eq data[:name]
     expect(tea_poro.description).to eq data[:description]
     expect(tea_poro.brew_time).to eq data[:brew_time].to_i
     expect(tea_poro.temperature).to eq data[:temperature].to_i
